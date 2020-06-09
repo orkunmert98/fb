@@ -108,7 +108,7 @@ Alert.alert(JSON.stringify(e.message))
             <Block middle>
               <ArButton style={styles.createButton} onPress={()=>navi.navigate("Sign Up")}>
                 <Text bold size={14} style={{color:"white"}} >
-                  Create new Account
+                  Create New Account
                 </Text>
               </ArButton>
             </Block>

@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View ,  Modal,TouchableHighlight,Image,Dimensions} from 'react-native';
+import { StyleSheet, Text, View ,  Modal,TouchableHighlight,Image,Dimensions,TouchableOpacity} from 'react-native';
 import { Title,Subheading ,Caption,Paragraph,Button} from 'react-native-paper';
 import { Avatar, Card, IconButton,TextInput } from 'react-native-paper';
 import profile from "../../assets/profil.png"
 import ImageViewer from 'react-native-image-zoom-viewer';
 import GallerySwiper from "react-native-gallery-swiper";
+import Header from "./imageHeader"
+import Footer from "./imagef"
+import ImageView from "react-native-image-viewing";
 import {connect } from "react-redux"
 import moment from "moment"
 import { firestore } from '../../firebase/firebase.utils';
@@ -36,19 +39,6 @@ function App({name,time,image,id,email,user,post}) {
 const [imagess,setimages]=React.useState([])
 console.log(imagess)
 
-const imagesa = [{
-  // Simplest usage.
-  url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
-
- 
-  // height: number
-  // Optional, if you know the image size, you can set the optimization performance
-
-  // You can pass props to <Image />.
-  props: {
-      // headers: ...
-  }
-}]
 
 
 
@@ -60,8 +50,8 @@ const newimg=[]
 
   image.map(item=>
     
-    newimg.push({url:item,
-      dimensions: { width: windowWidth,height:windowWidth*3/4 } 
+    newimg.push({uri:item,
+    
     
     })
     )
@@ -86,7 +76,7 @@ const del=()=>{
 
 }
 
-
+const [visible, setIsVisible] = React.useState(false);
  
   return (
     
@@ -101,15 +91,23 @@ imagess?(
   />
         
   <View style={{width:"95%",alignSelf:"center",marginTop:20,marginBottom:20}}><Paragraph>{post}</Paragraph></View>
- {image.length?(
- <View style={{height:windowWidth*3/4}}>
+ {imagess.length?(
+ <TouchableOpacity  onPress={()=>setIsVisible(true)} style={{height:windowWidth*3/4}}>
+
+<Image source={{uri:imagess[0].uri}} style={{width:windowWidth,height:windowWidth*3/4}} onPress={()=>console.log("n")}></Image>
+
  <ImageView
-  images={images}
+ 
+  images={imagess}
   imageIndex={0}
   visible={visible}
   onRequestClose={() => setIsVisible(false)}
+  
+  FooterComponent={({ imageIndex }) => (
+    <Footer imageIndex={imageIndex} imagesCount={imagess.length} />
+  )}
 />
-</View>
+</TouchableOpacity> 
 
 
  ):(null)}

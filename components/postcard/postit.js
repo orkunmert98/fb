@@ -30,7 +30,7 @@ function App({open,setopen,user}) {
 
         setloading(true)
 if(ımgarray){
-  const number=Date.now()
+
     try {
 
       let Down=[]
@@ -47,7 +47,7 @@ if(ımgarray){
 
           result = await result.blob();
 
-
+          const number=Date.now()
 
           var ref = firebase.storage().ref().child(`images/${number}`);
         await ref.put(result)
@@ -69,13 +69,13 @@ if(ımgarray){
 
       );
 
- 
-      firestore.collection("Posts").doc(`${number}`).set({
+      const number2=Date.now()
+      firestore.collection("Posts").doc(`${number2}`).set({
         name: user.name,
         post:post,
       imgUrl:Down,
-      id:number,
-      createdAt:number
+      id:number2,
+      createdAt:number2
       ,email:user.email
       })
       .then(function() {

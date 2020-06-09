@@ -136,8 +136,8 @@ setloading(false)
              </Block>
              
              <Block middle>
-               <ArButton style={styles.createButton} onPress={handleSubmit}>
-                 <Text bold size={14} style={{color:"white"}} onPress={()=>navi.navigate("Sign In")}>
+               <ArButton style={styles.createButton}  onPress={()=>navi.navigate("Sign In")}>
+                 <Text bold size={14} style={{color:"white"}}>
                    I have Already An Account
                  </Text>
                </ArButton>
